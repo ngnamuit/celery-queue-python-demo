@@ -9,7 +9,22 @@ The repo supports sending email asynchronous via task queue/job queue celery, ra
 - RabbitMQ broker: http://docs.celeryproject.org/en/latest/getting-started/brokers/rabbitmq.html
 - Celery Worker: http://docs.celeryproject.org/en/latest/userguide/workers.html
 
+## Usage
 
+```
+    # set config.test.json
+
+    # start worker
+    pipenv run celery worker -A celery_worker  --conf=flowerconfig.py
+
+    # start Flower
+    pipenv run flower -A celery_worker 
+
+    # run demo.py file
+    pipenv run python demo.py
+
+    # open flower on localhost:5555 and track result
+```
 
 ## Set up environment
 
@@ -102,19 +117,3 @@ pipenv --version
 ```
 
 - `cd` to `you_project_path` and run `pipenv sync` to install all dependencies of project.
-
-### 3. Usage
-```
-    # set config.test.json
-
-    # start worker
-    pipenv run celery worker -A celery_worker  --conf=flowerconfig.py
-
-    # start Flower
-    pipenv run flower -A celery_worker 
-
-    # run demo.py fil
-    pipenv run python demo.py
-
-    # open flower on localhost:5555 and track result
-```
