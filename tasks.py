@@ -1,4 +1,4 @@
-from celery_worker import app as app
+from celery_worker import app as app, config
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 import os
@@ -16,13 +16,13 @@ def delay(task, *args, **kwargs):
 
 def send_mail(to_email, subject, html_content):
     message = Mail(
-        from_email   = 'ngnamuit@gmai.com',
+        from_email   = config['from_email'],
         to_emails    = to_email,
         subject      = subject,
         html_content = html_content
     )
     try:
-        sg = SendGridAPIClient("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")
+        sg = SendGridAPIClient(config['sendgrid_api_key'])
         response = sg.send(message)
         return response
     except Exception as e:
